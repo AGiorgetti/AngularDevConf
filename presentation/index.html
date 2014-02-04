@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>AngularJS Dev Conf - Scopes &and; Directives</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1>AngularJS</h1>
+                <h3>Scope e Direttive</h3>
+                <p>
+                    <small>Speaker:
+                        <a href="http://www.rimordialcode.com">Alessandro Giorgetti</a>/
+                        <a href="http://twitter.com/a_giorgetti">@a_giorgetti</a>
+                    </small>
+                </p>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Scope</h2>
+                    <ul>
+                        <li>Fungono da collante tra il modello e la UI, costituiscono il contesto di binding.</li>
+                        <li>Costituiscono il contesto di esecuzione per la valutazione di espressioni.</li>
+                        <li>Hanno struttura gerarchica, simile a quella del DOM</li>
+                        <li>Forniscono API per osservare lo stato di oggetti od espressioni ($watch)</li>
+                        <li>Forniscono API per propagare cambiamenti di stato del modello generati al di fuori del normale ciclo di esecuzione di Angular ($apply)</li>
+                        <li>Forniscono API per generare e propagare eventi ($broadcast, $emit)</li>
+                    </ul>
+
+                    <aside class="notes">
+                        can see them if you open the speaker notes window (hit 's' on your keyboard).
+                    </aside>
+                </section>
+                <section>
+                    <h2>Scope</h2>
+                    <ul>
+                        <li>Ogni applicazione Angular ha 1 solo $rootScope</li>
+                        <li>E' comunque possibile creare nuovi Scope programmaticamente.</li>
+                        <li>Quando un nuovo scope viene creato a partire da un'altro scope di parla di
+                            <b>Child Scope</b>.</li>
+                        <li>Alcune direttive possono richiedere la creazione di Child Scope (ex: ngontroller).</li>
+                        <li>Gli scope costituiscono una struttura ad albero che ha la sua radice nel $rootScope</li>
+                        <li>
+                            <b>Ad ogni nodo del DOM pu&ograve; essere associato 1 ed 1 solo scope.</b>
+                        </li>
+                    </ul>
+
+                </section>
+                <section>
+                    <h2>Child Scope / Inherited Scope</h2>
+                    <ul>
+                        <li>I Child scope creati ereditano il prototipo del loro scope parent (
+                            <b>prototypical inheritance</b>).</li>
+                        <li>Quando AngularJS deve valutare una espressione inizia dallo scope a cui l'elemento è associato.</li>
+                        <li>Se la proprietà non viene trovata si passa ad analizzare il parent, e così via</li>
+                    </ul>
+
+                    <p>Time for a Demo!</p>
+
+                    <aside class="notes">
+                        - mostrare 01 - illustrare l'esempio - vedere scope nidificati - illustrare i dati su rootscope
+                    </aside>
+                </section>
+                <section>
+                    <h2>Scope</h2>
+                    <p>Informazioni dettagliate a questi
+                        <a href="http://docs.angularjs.org/guide/scope">link</a>della guida di AngularJS</p>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Directive</h2>
+                    <p>
+                        Consentono di estendere le possibilità dell'html classico abilitando la creazione di veri e propri
+                        <b>Web Controls</b>
+                    </p>
+                    <p>
+                        Le direttive sono dei
+                        <strong>marker</strong>su un elemento del DOM (css class, attributo, elemento/tag) che indicano al 'compilatore HTML' di Angular come trasformare gli elementi del DOM e quali comportamenti aggiungere.
+                    </p>
+                    <p>
+                        Angular fornisce un set predefinito (in espansione) di direttive predefinite che consentono di rendere interattiva la pagina HTML (ngModel, ngController, ngBind, ngRepeat,...)
+                    </p>
+                </section>
+                <section>
+                    <h2>Una direttiva si fa cos&igrave;:</h2>
+                    <pre>
+                        <code data-trim>
+var myModule = angular.module(...);
+ 
+myModule.directive('directiveName', function factory(injectables) {
+  var directiveDefinitionObject = {
+    priority: 0,
+    template: '<div></div>', // or // function(tElement, tAttrs) { ... },
+    // or
+    // templateUrl: 'directive.html', // or // function(tElement, tAttrs) { ... },
+    replace: false,
+    transclude: false,
+    restrict: 'A',
+    scope: false,
+    controller: function($scope, $element, $attrs, $transclude, otherInjectables) { ... },
+    require: 'siblingDirectiveName', // or // ['^parentDirectiveName', '?optionalDirectiveName', '?^optionalParent'],
+    compile: function compile(tElement, tAttrs, transclude) {
+      return {
+        pre: function preLink(scope, iElement, iAttrs, controller) { ... },
+        post: function postLink(scope, iElement, iAttrs, controller) { ... }
+      }
+      // or
+      // return function postLink( ... ) { ... }
+    },
+    // or
+    // link: {
+    //  pre: function preLink(scope, iElement, iAttrs, controller) { ... },
+    //  post: function postLink(scope, iElement, iAttrs, controller) { ... }
+    // }
+    // or
+    // link: function postLink( ... ) { ... }
+  };
+  return directiveDefinitionObject;
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>La nostra prima direttiva</h2>
+                    <p>Aggiungiamo comportamento</p>
+                    <pre>
+                        <code>
+    .directive('selectOnFocus', function () {
+        return {
+            restrict: 'A',
+            link: function(scope, iElement) {
+                iElement.mouseup(function(evt) {
+                    evt.preventDefault();
+                });
+                iElement.focus(function() {
+                    iElement.select();
+                });
+            }
+        }
+    })
+                        </code>
+                    </pre>
+                    <p>introducing: 
+                        <ul>
+                            <li><strong>restrict (E, A, C, M)</strong> - impone restrizioni sulla modalità di dichiarazione.</li>
+                            <li><strong>link(scope, iElement, iAttrs, controller, transcludeFn){...}</strong> - aggiungere comportamento al DOM: registra gli event handler ed è responsabile dell'aggiornamento del DOM.</li>
+                        </ul>
+                    <p></p>
+                </section>
+                <section>
+                    <h2>The Link function</h2>
+                    <p>argomenti:</p>
+                    <ul>
+                        <li>scope - lo scope usato dalla direttiva.</li>
+                        <li>iElement - elemento del DOM a cui la direttiva è collegata.</li>
+                        <li>iAttrs - lista degli attributi dichiarati sull'elemento (condivisa tra tutte le direttive applicate sullo stesso elemento)</li>
+                        <li>controller - lista dei controller associati alle direttive applicate allo stesso elemento</li>
+                        <li>transcludeFn - A transclude linking function pre-bound to the correct transclusion scope. ?!? WHAT THE H... ?!?</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>La nostra seconda diretiva (widget)</h2>
+                    <pre>
+                        <code data-trim>
+angular.module('myDirectives', [])
+    .directive('myLabelInput', function () {
+        return {
+            restrict: 'EA',
+            replace: true,
+            template: '<div class="form-group">' +
+                      '<label for="exampleInputEmail1">Email address</label>' +'
+                      '<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" ng-model="data.email">' +
+                      '</div>'
+        }
+    });
+                        </code>
+                    </pre>
+                    <p>introducing: <strong>replace</strong> &amp; <strong>template</strong></p>
+                </section>
+                <section>
+                    <h2>Make it 'interactive': Directive & Scope</h2>
+                    consentire alle direttive di creare i propri scope è fondamentale per creare componenti che siano riutilizzabili sfruttanto il meccanismo dei binding senza dover 'impazzire' nel gestire la comunicazione con l'esterno tramite attributi.
+                    <pre>
+                        <code data-trim>
+.directive('myLabelInput2', function () {
+            // make it usable!
+            return {
+                restrict: 'EA',
+                replace: true,
+                scope: { // isolated scope!!! (it does not inherits the scope from its enclosing scope).
+                    id: '@', // one-way binding
+                    type: '@',
+                    placeholder: '@',
+                    ngModel: '=' // two-way binding
+                },
+                template: '<div class="form-group">' +
+                    '<label for="{{ id }}">{{ placeholder }}</label>' +
+                    '<input type="{{ type }}" class="form-control" id="{{ id }}" placeholder="{{ placeholder }}" data-ng-model="ngModel" data-select-on-focus="">' +
+                    '</div>'
+                // templateUrl: 'file.html' 
+            };
+        });
+                        </code>
+                    </pre>
+                    <p>introducing: <strong>scope</strong> - gli scope isolati non ereditano il prototipo del parent scope, serve a prevenire leak di dati e ad evitare modifiche accidentali dei dati sui parent scope.</p>
+                </section>
+                <section>
+                    <h2>Passare parametri ad uno Scope</h2>
+                    <p>il passaggio di parametri avviene dichiarativamente dal template HTML verso le proprietà definite sull'oggetto che definisce lo scope:</p>
+                    <pre>
+<code>
+scope: {
+    oneWayExpression: '@',
+    twoWayBinding: '=',
+    oneWayBehavior: '&amp;'
+}
+
+&lt;div my-directive
+    one-way-expression="questa espressione viene valutata: {{ i++ }}"
+    two-way-binding="variabile"
+    one-way-behavior="chiamafunzione(variabile)" &gt;
+&lt;/div&gt;
+</code>
+                    </pre>
+                    <p>
+                    @ - binding tra la variabile sul local scope ed il valore di un attributo sul DOM (eventualmente una espressione che viene valutata)<br />
+                    = - binding bidirezionale tra proprietà definita sullo scope isolato della direttiva e proprietà associata allo scope esterno (definita mediante attributo sul template) <br />
+                    &amp; - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sul parent scope utilizzando una mappatura dei parametri, ex: chiamafunzione(variabile) può essere invocata come: $scope.chiamafunzione({ variabile: 'xxx'}).
+                    </p>
+                </section>
+                
+            </section>
+
+        </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+        // Full list of configuration options available here:
+        			// https://github.com/hakimel/reveal.js#configuration
+        			Reveal.initialize({
+        				controls: true,
+        				progress: true,
+        				history: true,
+        				center: true,
+        
+        				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        
+        				// Parallax scrolling
+        				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        				// parallaxBackgroundSize: '2100px 900px',
+        
+        				// Optional libraries used to extend on reveal.js
+        				dependencies: [
+        					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+        					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+        					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        				]
+        			});
+    </script>
+
+</body>
+
+</html>
