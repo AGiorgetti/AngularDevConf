@@ -51,12 +51,12 @@
                 <section>
                     <h2>Scope</h2>
                     <ul>
-                        <li>Fungono da collante tra il modello e la UI, costituiscono il contesto di binding.</li>
-                        <li>Costituiscono il contesto di esecuzione per la valutazione di espressioni.</li>
-                        <li>Hanno struttura gerarchica, simile a quella del DOM</li>
-                        <li>Forniscono API per osservare lo stato di oggetti od espressioni ($watch)</li>
-                        <li>Forniscono API per propagare cambiamenti di stato del modello generati al di fuori del normale ciclo di esecuzione di Angular ($apply)</li>
-                        <li>Forniscono API per generare e propagare eventi ($broadcast, $emit)</li>
+                        <li class="fragment">Fungono da collante tra il modello e la UI, costituiscono il contesto di binding.</li>
+                        <li class="fragment">Costituiscono il contesto di esecuzione per la valutazione di espressioni.</li>
+                        <li class="fragment">Hanno struttura gerarchica, simile a quella del DOM</li>
+                        <li class="fragment">Forniscono API per osservare lo stato di oggetti od espressioni ($watch)</li>
+                        <li class="fragment">Forniscono API per propagare cambiamenti di stato del modello generati al di fuori del normale ciclo di esecuzione di Angular ($apply)</li>
+                        <li class="fragment">Forniscono API per generare e propagare eventi ($broadcast, $emit)</li>
                     </ul>
 
                     <aside class="notes">
@@ -66,13 +66,13 @@
                 <section>
                     <h2>Scope</h2>
                     <ul>
-                        <li>Ogni applicazione Angular ha 1 solo $rootScope</li>
-                        <li>E' comunque possibile creare nuovi Scope programmaticamente.</li>
-                        <li>Quando un nuovo scope viene creato a partire da un'altro scope di parla di
+                        <li class="fragment">Ogni applicazione Angular ha 1 solo $rootScope</li>
+                        <li class="fragment">E' comunque possibile creare nuovi Scope programmaticamente.</li>
+                        <li class="fragment">Quando un nuovo scope viene creato a partire da un'altro scope di parla di
                             <b>Child Scope</b>.</li>
-                        <li>Alcune direttive possono richiedere la creazione di Child Scope (ex: ngontroller).</li>
-                        <li>Gli scope costituiscono una struttura ad albero che ha la sua radice nel $rootScope</li>
-                        <li>
+                        <li class="fragment">Alcune direttive possono richiedere la creazione di Child Scope (ex: ngontroller).</li>
+                        <li class="fragment">Gli scope costituiscono una struttura ad albero che ha la sua radice nel $rootScope</li>
+                        <li class="fragment">
                             <b>Ad ogni nodo del DOM pu&ograve; essere associato 1 ed 1 solo scope.</b>
                         </li>
                     </ul>
@@ -81,13 +81,15 @@
                 <section>
                     <h2>Child Scope / Inherited Scope</h2>
                     <ul>
-                        <li>I Child scope creati ereditano il prototipo del loro scope parent (
+                        <li class="fragment">I Child scope creati ereditano il prototipo del loro scope parent (
                             <b>prototypical inheritance</b>).</li>
-                        <li>Quando AngularJS deve valutare una espressione inizia dallo scope a cui l'elemento è associato.</li>
-                        <li>Se la proprietà non viene trovata si passa ad analizzare il parent, e così via</li>
+                        <li class="fragment">Quando AngularJS deve valutare una espressione inizia dallo scope a cui l'elemento è associato.</li>
+                        <li class="fragment">Se la proprietà non viene trovata si passa ad analizzare il parent, e così via</li>
                     </ul>
 
-                    <p>Time for a Demo!</p>
+                    <br />
+                    <br />
+                    <p class="fragment">Time for a Demo!</p>
 
                     <aside class="notes">
                         - mostrare 01 - illustrare l'esempio - vedere scope nidificati - illustrare i dati su rootscope
@@ -95,35 +97,30 @@
                 </section>
                 <section>
                     <h2>Scope</h2>
-                    <p>Informazioni dettagliate a questi
-                        <a href="http://docs.angularjs.org/guide/scope">link</a>della guida di AngularJS</p>
+                    <p>Informazioni dettagliate a questo
+                        <a href="http://docs.angularjs.org/guide/scope">link</a> della guida di AngularJS</p>
                 </section>
             </section>
 
             <section>
                 <section>
                     <h2>Directive</h2>
-                    <p>
-                        Consentono di estendere le possibilità dell'html classico abilitando la creazione di veri e propri
-                        <b>Web Controls</b>
-                    </p>
-                    <p>
-                        Le direttive sono dei
-                        <strong>marker</strong>su un elemento del DOM (css class, attributo, elemento/tag) che indicano al 'compilatore HTML' di Angular come trasformare gli elementi del DOM e quali comportamenti aggiungere.
-                    </p>
-                    <p>
-                        Angular fornisce un set predefinito (in espansione) di direttive predefinite che consentono di rendere interattiva la pagina HTML (ngModel, ngController, ngBind, ngRepeat,...)
-                    </p>
+                    <ul>
+                        <li class="fragment">Consentono di estendere le possibilità dell'html classico abilitando la creazione di veri e propri
+                        <b>Web Controls</b></li>
+                        <li class="fragment">Le direttive sono dei
+                        <strong>marker</strong>su un elemento del DOM (css class, attributo, elemento/tag) che indicano al 'compilatore HTML' di Angular come trasformare gli elementi del DOM e quali comportamenti aggiungere.</li>
+                        <li class="fragment">Angular fornisce un set predefinito (in espansione) di direttive predefinite che consentono di rendere interattiva la pagina HTML (ngModel, ngController, ngBind, ngRepeat,...)</li>
+                    </ul>
                 </section>
                 <section>
                     <h2>Una direttiva si fa cos&igrave;:</h2>
-                    <pre>
-                        <code data-trim>
+                    <pre><code>
 var myModule = angular.module(...);
- 
 myModule.directive('directiveName', function factory(injectables) {
   var directiveDefinitionObject = {
     priority: 0,
+    terminal: false,
     template: '<div></div>', // or // function(tElement, tAttrs) { ... },
     // or
     // templateUrl: 'directive.html', // or // function(tElement, tAttrs) { ... },
@@ -151,15 +148,13 @@ myModule.directive('directiveName', function factory(injectables) {
   };
   return directiveDefinitionObject;
 });
-                        </code>
-                    </pre>
+</code></pre>
                 </section>
                 <section>
                     <h2>La nostra prima direttiva</h2>
                     <p>Aggiungiamo comportamento</p>
-                    <pre>
-                        <code>
-    .directive('selectOnFocus', function () {
+                    <pre><code>
+.directive('selectOnFocus', function () {
         return {
             restrict: 'A',
             link: function(scope, iElement) {
@@ -172,30 +167,26 @@ myModule.directive('directiveName', function factory(injectables) {
             }
         }
     })
-                        </code>
-                    </pre>
-                    <p>introducing: 
-                        <ul>
+</code></pre>
+                        <ul style="font-size: 30px">
                             <li><strong>restrict (E, A, C, M)</strong> - impone restrizioni sulla modalità di dichiarazione.</li>
                             <li><strong>link(scope, iElement, iAttrs, controller, transcludeFn){...}</strong> - aggiungere comportamento al DOM: registra gli event handler ed è responsabile dell'aggiornamento del DOM.</li>
-                        </ul>
-                    <p></p>
+                        </ul>                  
                 </section>
                 <section>
                     <h2>The Link function</h2>
                     <p>argomenti:</p>
                     <ul>
-                        <li>scope - lo scope usato dalla direttiva.</li>
-                        <li>iElement - elemento del DOM a cui la direttiva è collegata.</li>
-                        <li>iAttrs - lista degli attributi dichiarati sull'elemento (condivisa tra tutte le direttive applicate sullo stesso elemento)</li>
-                        <li>controller - lista dei controller associati alle direttive applicate allo stesso elemento</li>
-                        <li>transcludeFn - A transclude linking function pre-bound to the correct transclusion scope. ?!? WHAT THE H... ?!?</li>
+                        <li class="fragment">scope - lo scope usato dalla direttiva.</li>
+                        <li class="fragment">iElement - elemento del DOM a cui la direttiva è collegata.</li>
+                        <li class="fragment">iAttrs - lista degli attributi dichiarati sull'elemento (condivisa tra tutte le direttive applicate sullo stesso elemento)</li>
+                        <li class="fragment">controller - lista dei controller associati alle direttive applicate allo stesso elemento</li>
+                        <li class="fragment">transcludeFn - A transclude linking function pre-bound to the correct transclusion scope. ?!? WHAT THE H... ?!?</li>
                     </ul>
                 </section>
                 <section>
                     <h2>La nostra seconda diretiva (widget)</h2>
-                    <pre>
-                        <code data-trim>
+                    <pre><code data-trim>
 angular.module('myDirectives', [])
     .directive('myLabelInput', function () {
         return {
@@ -207,15 +198,13 @@ angular.module('myDirectives', [])
                       '</div>'
         }
     });
-                        </code>
-                    </pre>
+</code></pre>
                     <p>introducing: <strong>replace</strong> &amp; <strong>template</strong></p>
                 </section>
                 <section>
                     <h2>Make it 'interactive': Directive & Scope</h2>
-                    consentire alle direttive di creare i propri scope è fondamentale per creare componenti che siano riutilizzabili sfruttanto il meccanismo dei binding senza dover 'impazzire' nel gestire la comunicazione con l'esterno tramite attributi.
-                    <pre>
-                        <code data-trim>
+                    <p style="font-size: 24px; text-align: left">consentire alle direttive di creare i propri scope è fondamentale per creare componenti che siano riutilizzabili sfruttanto il meccanismo dei binding senza dover 'impazzire' nel gestire la comunicazione con l'esterno tramite attributi.</p>
+                    <pre><code data-trim>
 .directive('myLabelInput2', function () {
             // make it usable!
             return {
@@ -234,16 +223,13 @@ angular.module('myDirectives', [])
                 // templateUrl: 'file.html' 
             };
         });
-                        </code>
-                    </pre>
-                    <p>introducing: <strong>scope</strong> - gli scope isolati non ereditano il prototipo del parent scope, serve a prevenire leak di dati e ad evitare modifiche accidentali dei dati sui parent scope.</p>
+</code></pre>
+                    <p style="font-size: 30px">introducing: <strong>scope</strong> - gli scope isolati non ereditano il prototipo del parent scope, serve a prevenire leak di dati e ad evitare modifiche accidentali dei dati sui parent scope.</p>
                 </section>
                 <section>
                     <h2>Passare parametri ad uno Scope</h2>
-                    <p>il passaggio di parametri avviene dichiarativamente dal template HTML verso le proprietà definite sull'oggetto che definisce lo scope:</p>
-                    <pre>
-<code>
-scope: {
+                    <p style="font-size: 16px; text-align: left">il passaggio di parametri avviene dichiarativamente dal template HTML verso le proprietà definite sull'oggetto che definisce lo scope:</p>
+                        <pre><code>scope: {
     oneWayExpression: '@',
     twoWayBinding: '=',
     oneWayBehavior: '&amp;'
@@ -254,19 +240,15 @@ scope: {
     two-way-binding="variabile"
     one-way-behavior="chiamafunzione(variabile)" &gt;
 &lt;/div&gt;
-</code>
-                    </pre>
-                    <p>
-                    @ - binding tra la variabile sul local scope ed il valore di un attributo sul DOM (eventualmente una espressione che viene valutata)<br />
-                    = - binding bidirezionale tra proprietà definita sullo scope isolato della direttiva e proprietà associata allo scope esterno (definita mediante attributo sul template) <br />
-                    &amp; - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sul parent scope utilizzando una mappatura dei parametri, ex: chiamafunzione(variabile) può essere invocata come: $scope.chiamafunzione({ variabile: 'xxx'}).
-                    </p>
+</code></pre>
+                    <ul style="font-size: 20px">
+                    <li class="fragment"><b>@</b> - binding tra la variabile sul local scope ed il valore di un attributo sul DOM (eventualmente una espressione che viene valutata)<br /></li>
+                    <li class="fragment"><b>=</b> - binding bidirezionale tra proprietà definita sullo scope isolato della direttiva e proprietà associata allo scope esterno (definita mediante attributo sul template) <br /></li>
+                    <li class="fragment"><b>&amp;</b> - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sul parent scope utilizzando una mappatura dei parametri, ex: chiamafunzione(variabile) può essere invocata come: $scope.chiamafunzione({ variabile: 'xxx'}).
+                    </ul></li>
                 </section>
-                
             </section>
-
         </div>
-
     </div>
 
     <script src="lib/js/head.min.js"></script>

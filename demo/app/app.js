@@ -19,6 +19,22 @@ angular
             when('/ctrldemo2', {
                 templateUrl: '../track/02-scopeinheritance.html'
             }).
+            when('/dirdemo1', {
+                templateUrl: '../track/01-directive.html',
+                controller: 'directiveCtrl'
+            }).
+            when('/dirdemo2', {
+                templateUrl: '../track/02-directive.html',
+                controller: 'directiveCtrl'
+            }).
+            when('/dirdemo3', {
+                templateUrl: '../track/03-directive.html',
+                controller: 'directiveCtrl'
+            }).
+            when('/dirdemo4', {
+                templateUrl: '../track/04-directive.html',
+                controller: 'directiveCtrl'
+            }).
             otherwise({
                 redirectTo: '/'
             });

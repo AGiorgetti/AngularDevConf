@@ -60,12 +60,27 @@
                         '<input type="' + iAttrs.type + '" class="form-control" id="' + iAttrs.id + '" placeholder="' + iAttrs.placeholder + '" ng-model="ngModel" data-select-on-focus="">' +
                         '</div>';
                     iElement.replaceWith(angular.element(html));
-                    
+
                     // the $compile service converts an HTML string into Angular template (and returns a link function to be used against a scope)
                 }
                 // you can check for changes on attrs with: iAttrs.observe() 
                 // you can set values using .Attrs.$set()
             };
+        })
+    
+        // priority
+        // terminal
+        // controller
+        // require
+    
+        .directive('myCenteredFrame', function () {
+            // an example of transclusion
+            
+            return {
+                restrict: 'EA',
+                transclude: true,
+                //replace: true,
+                template: '<div class="row"><div class="col-xs-8 col-xs-offset-2" ng-transclude></div></div>'
+            }
         });
-
 }());
