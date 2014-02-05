@@ -1,0 +1,38 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img ng-src="{{vm.opening.logo}}" style="width: 100%;">
+                <p>
+                    <em>"{{vm.opening.spot}}"</em>
+                </p>
+
+            </div>
+            <div class="col-md-6">
+                <h3>{{vm.opening.title}}</h3>
+                <p>
+                    {{vm.opening.text}}
+                </p>
+
+                <p><a class="btn btn-primary btn-lg" role="button"
+                      href="{{vm.opening.link.url}}"
+                      target="_blank">{{vm.opening.link.text}}</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" ng-repeat="slot in vm.marketing">
+            <img ng-src="{{slot.logo}}" style="width: 90%;">
+
+            <p>{{slot.text}}</p>
+
+            <p><a class="btn btn-default"
+                  href="{{slot.link.url}}"
+                  target="_blank"
+                  role="button">{{slot.link.title}}</a></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+body {
+    min-height: 2000px;
+    padding-top: 70px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.debug-pane {
+    margin-top: 40px;
+}
+
+.toggle-on{
+    color : red !important;
+}
+
+.page-header{
+    margin-top:0px!important;
+}
+
+.searchresults .item{
+    margin-bottom: 33px;
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.searchresults .item img{
+    width: 100%;
+}
+
+.searchresults .item .title{
+    margin-top:-24px;
+    position: relative;
+}
+
+.searchresults .item .title .background{
+    background-color: darkgray ;
+    opacity: 0.8;
+    height: 24px;
+    bottom:0px;
+}
+
+.searchresults .item .title .text{
+    padding: 2px;
+    color: white;
+    bottom:0px;
+    position: absolute;
+}
+
+.angular-google-map-container{
+    height: 400px;
+}
+
+input.search-text{
+    width: 30em!important;
+}
