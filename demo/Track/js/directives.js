@@ -29,7 +29,7 @@
             };
         })
         .directive('myLabelInputScope', function () {
-            // make it usable!
+            // make it reusable!
             return {
                 restrict: 'EA',
                 replace: true,
@@ -46,32 +46,33 @@
                     '</div>'
             };
         })
-        .directive('myLabelInputUsingCompile', ['$compile', function ($compile) {
-            // compile & attributes!
-            return {
-                restrict: 'EA',
-                replace: true,
-                scope: {
-                    ngModel: '='
-                },
-                //template: '<p>template</p>', // if a template is specified it gets linked to the scope automatically, otherwise you need to link it manually
-                compile: function (iElement, iAttrs) {
-                    // the right place for DOM manipulations.
-                    var html = '<div class="form-group">' +
-                        '<label for="' + iAttrs.id + '">' + iAttrs.placeholder + '</label>' +
-                        '<input type="' + iAttrs.type + '" class="form-control" id="' + iAttrs.id + '" placeholder="' + iAttrs.placeholder + '" ng-model="ngModel" data-select-on-focus="">' +
-                        '</div>';
-                    iElement.append(angular.element(html));
+        .directive('myLabelInputUsingCompile', ['$compile',
+            function ($compile) {
+                // compile & attributes!
+                return {
+                    restrict: 'EA',
+                    replace: true,
+                    scope: {
+                        ngModel: '='
+                    },
+                    //template: '<p>template</p>', // if a template is specified it gets linked to the scope automatically, otherwise you need to link it manually
+                    compile: function (iElement, iAttrs) {
+                        // the right place for DOM manipulations.
+                        var html = '<div class="form-group">' +
+                            '<label for="' + iAttrs.id + '">' + iAttrs.placeholder + '</label>' +
+                            '<input type="' + iAttrs.type + '" class="form-control" id="' + iAttrs.id + '" placeholder="' + iAttrs.placeholder + '" ng-model="ngModel" data-select-on-focus="">' +
+                            '</div>';
+                        iElement.append(angular.element(html));
 
-                    // the $compile service converts an HTML string into Angular template (and returns a link function to be used against a scope)
-                    return function (scope, iElement) {
-                        $compile(iElement.contents())(scope);
-                    };
-                }
-                // you can check for changes on attrs with: iAttrs.observe() 
-                // you can set values using .Attrs.$set()
-            };
-        }])
+                        // the $compile service converts an HTML string into Angular template (and returns a link function to be used against a scope)
+                        return function (scope, iElement) {
+                            $compile(iElement.contents())(scope);
+                        };
+                    }
+                    // you can check for changes on attrs with: iAttrs.observe() 
+                    // you can set values using .Attrs.$set()
+                };
+            }])
         .directive('myCenteredFrame', function () {
             // transclude
             return {
@@ -94,25 +95,30 @@
                     '<a href="" ng-click="select(pane)">{{pane.title}}</a>' +
                     '</li></ul>' +
                     '<div class="tab-content" ng-transclude></div></div>',
-                controller: function ($scope) {
-                    // the controlle is instantiated before the link functions are called
-                    // the controller gets injected in every directive that requires it
-                    var panes = $scope.panes = [];
+                controller: ['$scope', '$element', '$attrs', '$transclude',
+                    function ($scope, $element, $attrs, $transclude) {
+                        // the controlle is instantiated before the link functions are called
 
-                    $scope.select = function (pane) {
-                        angular.forEach(panes, function (pane) {
-                            pane.selected = false;
-                        });
-                        pane.selected = true;
-                    };
+                        // the controller is injectable! pay attention to minifications.
 
-                    this.addPane = function (pane) {
-                        if (panes.length === 0) {
-                            $scope.select(pane);
-                        }
-                        panes.push(pane);
-                    };
-                }
+                        // the controller gets injected in every directive that requires it
+
+                        var panes = $scope.panes = [];
+
+                        $scope.select = function (pane) {
+                            angular.forEach(panes, function (pane) {
+                                pane.selected = false;
+                            });
+                            pane.selected = true;
+                        };
+
+                        this.addPane = function (pane) {
+                            if (panes.length === 0) {
+                                $scope.select(pane);
+                            }
+                            panes.push(pane);
+                        };
+                    }]
             };
         })
         .directive('myPane', function () {
