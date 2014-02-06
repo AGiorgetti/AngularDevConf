@@ -1,0 +1,93 @@
+/*
+  We're using CSS transitions for when
+  the enter and move events are triggered
+  for the element that has the .search-result-item
+  class
+*/
+.search-result-item.ng-enter, .search-result-item.ng-move {
+    -webkit-transition:0.3s linear all;
+    -moz-transition:0.3s linear all;
+    -o-transition:0.3s linear all;
+    transition:0.3s linear all;
+    opacity:0;
+}
+
+/*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+.search-result-item.ng-enter.ng-enter-active,
+.search-result-item.ng-move.ng-move-active {
+    opacity:1;
+}
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .search-result-item class
+*/
+.search-result-item.ng-leave {
+    -webkit-animation:0.3s my_animation;
+    -moz-animation:0.3s my_animation;
+    -o-animation:0.3s my_animation;
+    animation:0.3s my_animation;
+}
+
+@keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+@-moz-keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+@-o-keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+.main-view-container {
+
+}
+
+.main-view {
+}
+
+.main-view.ng-enter, .main-view.ng-leave {
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.0s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.0s;
+
+    display:block;
+    width:100%;
+    border-left:1px solid black;
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:10px;
+}
+
+.main-view.ng-enter {
+    top:-100%;
+}
+.main-view.ng-enter.ng-enter-active {
+    top:0;
+}
+.main-view.ng-leave.ng-leave-active {
+    top:100%;
+}
