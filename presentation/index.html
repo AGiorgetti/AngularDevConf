@@ -297,6 +297,13 @@ angular.module('myDirectives', [])
                     <p class="fragment" style="font-size: 26px">Nell'ordine di esecuzione delle funzioni il controller viene istanziato PRIMA della chiamata alle pre-linking functions. Consente alle direttive di comunicare e modificare il comportamento l'una dell'altra.</p>
                     <p class="fragment" style="font-size: 26px">Take a look at the 'myTabs &amp; myPane' sample directives!</p>
                 </section>
+                <section>
+                    <h2>Ancora due cose:</h2>
+                    <ul>
+                        <li class="fragment"><b>priority</b> - imposta ordine di priorità nell'esecuzione delle direttive: maggiore il numero più alta la priorità. All'interno della stessa priorità l'ordine di esecuzione non è garantito.</li>
+                        <li class="fragment"><b>terminal</b> - arresta l'esecuzione delle direttive sull'ordine di priorità della direttiva corrente: direttive con priorità inferiore non vengono eseguite.</li>
+                    </ul>
+                </section>
             </section>
             <section>
                 <h2>That's it!&nbsp;&nbsp;&nbsp;Q &amp; A time!</h2>
