@@ -78,6 +78,7 @@
             return {
                 restrict: 'EA',
                 transclude: true,
+                replace: true,
                 //replace: true,
                 template: '<div class="row"><div class="col-xs-8 col-xs-offset-2" ng-transclude></div></div>'
             };
@@ -87,6 +88,7 @@
             // controller
             return {
                 restrict: 'E',
+                //replace: true,
                 transclude: true,
                 scope: {},
                 template: '<div class="tabbable">' +
@@ -125,11 +127,12 @@
             return {
                 require: '^myTabs', // look myTabs in the parent node, pass the controller in the link functions
                 restrict: 'E',
+                // replace: true, // also use: ng-class="tab-pane {active:pane.selected}" otherwise the bootstrap style tab-content>tab-pane will hide everything
                 transclude: true,
                 scope: {
                     title: '@'
                 },
-                template: '<div class="tab-pane" ng-show="selected" ng-transclude></div>',
+                template: '<div ng-class="tab-pane" ng-show="selected" ng-transclude></div>',
                 link: function (scope, element, attrs, tabsCtrl) {
                     // use the injected controller
                     tabsCtrl.addPane(scope);
