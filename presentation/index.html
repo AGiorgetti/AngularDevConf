@@ -71,7 +71,7 @@
                     <h2>Scope</h2>
                     <ul>
                         <li class="fragment">Ogni applicazione Angular ha 1 solo <strong>$rootScope</strong>.</li>
-                        <li class="fragment">E' comunque possibile creare nuovi Scope prog rammaticamente.</li>
+                        <li class="fragment">E' comunque possibile creare nuovi Scope programmaticamente.</li>
                         <li class="fragment">Quando un nuovo scope viene creato a partire da un'altro scope si parla di
                             <b>Child Scope</b>.</li>
                         <li class="fragment">Alcune direttive possono richiedere la creazione di Child Scope (ex: ng-controller).</li>
@@ -247,7 +247,7 @@ angular.module('myDirectives', [])
                     <ul style="font-size: 20px">
                     <li class="fragment"><b>@</b> - binding tra la variabile sullo isolated scope ed il valore di un attributo sul DOM (eventualmente una espressione che viene valutata, il risultato è una stringa).</li>
                     <li class="fragment"><b>=</b> - binding bidirezionale tra la propriet&agrave; definita sullo scope isolato della direttiva e la proprietà associata allo scope esterno (definita mediante attributo sul template).</li>
-                    <li class="fragment"><b>&amp;</b> - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sul parent scope utilizzando una mappatura dei parametri, ex: func(variabile) può essere invocata come: $scope.func({ variabile: 'xxx'}).
+                    <li class="fragment"><b>&amp;</b> - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sul parent scope utilizzando una mappatura dei parametri, ex: func(variabile) può essere invocata come: $scope.oneWayBehavior({ variabile: 'xxx'}).
                     </ul></li>
                 </section>
                 <section>
