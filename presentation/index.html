@@ -55,7 +55,7 @@
                 <section>
                     <h2>Scope</h2>
                     <ul>
-                        <li class="fragment">Collante tra il modello e la UI, costituiscono il contesto di binding.</li>
+                        <li class="fragment">Collante tra il modello e la UI: il contesto di binding.</li>
                         <li class="fragment">Costituiscono il contesto di esecuzione per la valutazione di espressioni.</li>
                         <li class="fragment">Hanno struttura gerarchica, simile a quella del DOM.</li>
                         <li class="fragment">Forniscono API per osservare lo stato di oggetti ed espressioni ($watch). </li>
@@ -212,7 +212,7 @@ angular.module('myDirectives', [])
                 </section>
                 <section>
                     <h2>Make it reusable: isolated scope</h2>
-                    <p style="font-size: 24px; text-align: left">Consentire alle direttive di creare i propri scope è fondamentale per creare componenti che siano riutilizzabili sfruttanto il meccanismo dei binding senza dover 'impazzire' nel gestire la comunicazione con l'esterno tramite attributi.</p>
+                    <p style="font-size: 24px; text-align: left">Consentire alle direttive di creare i propri scope è fondamentale per realizzare componenti che siano riutilizzabili sfruttanto il meccanismo dei binding senza dover 'impazzire' nel gestire la comunicazione con l'esterno tramite attributi.</p>
                     <pre><code>
 .directive('myLabelInput2', function () {
             return {
@@ -251,7 +251,7 @@ angular.module('myDirectives', [])
                     <ul style="font-size: 20px">
                     <li class="fragment"><b>@</b> - binding tra la variabile sullo isolated scope ed il valore di un attributo sul DOM (eventualmente una espressione che viene valutata, il risultato è una stringa).</li>
                     <li class="fragment"><b>=</b> - binding bidirezionale tra la propriet&agrave; definita sullo scope isolato della direttiva e la proprietà associata allo scope esterno (definita mediante attributo sul template).</li>
-                    <li class="fragment"><b>&amp;</b> - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sul parent scope utilizzando una mappatura dei parametri, ex: func(variabile) può essere invocata come: $scope.oneWayBehavior({ variabile: 'xxx'}).
+                    <li class="fragment"><b>&amp;</b> - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sullo scope esterno utilizzando una mappatura dei parametri, ex: func(variabile) può essere invocata come: $scope.oneWayBehavior({ variabile: 'xxx'}).
                     </ul></li>
                 <p class="fragment">Demo!</p>
                 </section>
