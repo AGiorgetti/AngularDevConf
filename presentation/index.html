@@ -91,7 +91,7 @@
                     </ul>
                     <br />
                     <br />
-                    <p class="fragment">Time for a Demo!</p>
+                    <p class="fragment">Demo!</p>
 
                     <aside class="notes">
                         - mostrare 01 - illustrare l'esempio - vedere scope nidificati - illustrare i dati su rootscope
@@ -175,7 +175,7 @@ myModule.directive('directiveName', function factory(injectables) {
                             <li><strong>directive</strong> - dichiarare una direttiva.</li>
                             <li><strong>restrict (E, A, C, M)</strong> - impone restrizioni sulla modalità di dichiarazione.</li>
                             <li><strong>link(scope, iElement, iAttrs, controller, transcludeFn){...}</strong> - aggiungere comportamento al DOM: registra gli event handler ed è responsabile dell'aggiornamento del DOM.</li>
-                        </ul>                  
+                        </ul>  
                 </section>
                 <section>
                     <h2>The link() function</h2>
@@ -187,6 +187,9 @@ myModule.directive('directiveName', function factory(injectables) {
                         <li class="fragment">controller - lista dei controller associati alle direttive applicate allo stesso elemento.</li>
                         <li class="fragment">transcludeFn - A transclude linking function pre-bound to the correct transclusion scope. ?!? WHAT THE H... ?!?</li>
                     </ul> 
+                    <br />
+                    <br />
+                    <p class="fragment">Demo!</p>
                 </section>
                 <section>
                     <h2>La nostra 2° diretiva (hardcoded widget)</h2>
@@ -205,6 +208,7 @@ angular.module('myDirectives', [])
     });
 </code></pre>
                     <p>introducing: <strong>replace</strong> &amp; <strong>template</strong></p>
+                    <p class="fragment">Demo!</p>
                 </section>
                 <section>
                     <h2>Make it reusable: isolated scope</h2>
@@ -249,6 +253,7 @@ angular.module('myDirectives', [])
                     <li class="fragment"><b>=</b> - binding bidirezionale tra la propriet&agrave; definita sullo scope isolato della direttiva e la proprietà associata allo scope esterno (definita mediante attributo sul template).</li>
                     <li class="fragment"><b>&amp;</b> - metodo per eseguire funzioni e valutare espressioni nel contesto del chiamante: è possibile passare parametri alla funzione definita sul parent scope utilizzando una mappatura dei parametri, ex: func(variabile) può essere invocata come: $scope.oneWayBehavior({ variabile: 'xxx'}).
                     </ul></li>
+                <p class="fragment">Demo!</p>
                 </section>
                 <section>
                     <h2>The compile() function</h2>
@@ -262,6 +267,9 @@ angular.module('myDirectives', [])
                         <p class=fragment>Se si usa la funzione compile e si vuole renedere la direttiva dinamica (utilizzando uno scope) occorre far ritornare una link function ed eseguire la compilazione ed il linking allo scope manualmente usando il servizio $compile messo a disposizione da AngularJS</p>
                     </div>
                     <p>Introducing: <strong>compile</strong></p>
+                    <br />
+                    <br />
+                    <p class="fragment">Demo!</p>
                 </section>
                 <section>
                     <h2>Transclusion</h2>
@@ -280,6 +288,7 @@ angular.module('myDirectives', [])
             };
         })</code></pre>
                     <p>Introducing: <strong>transclude</strong> &amp; <strong>ng-transclude</strong></p>
+                    <p class="fragment">Demo!</p>
                 </section>
                 <section>
                     <h2>Controller</h2>
@@ -295,13 +304,16 @@ angular.module('myDirectives', [])
                     <br />
                     <p>Introducing: <strong>controller</strong> &amp; <strong>require</strong></p>
                     <p class="fragment" style="font-size: 26px">Nell'ordine di esecuzione delle funzioni il controller viene istanziato PRIMA della chiamata alle pre-linking functions. Consente alle direttive di comunicare e modificare il comportamento l'una dell'altra.</p>
-                    <p class="fragment" style="font-size: 26px">Take a look at the 'myTabs &amp; myPane' sample directives!</p>
+                    <p class="fragment" style="font-size: 26px">Demo: Take a look at the 'myTabs &amp; myPane' sample directives!</p>
                 </section>
                 <section>
                     <h2>Ancora due cose:</h2>
                     <ul>
                         <li class="fragment"><b>priority</b> - imposta ordine di priorità nell'esecuzione delle direttive: maggiore il numero più alta la priorità. All'interno della stessa priorità l'ordine di esecuzione non è garantito.</li>
                         <li class="fragment"><b>terminal</b> - arresta l'esecuzione delle direttive sull'ordine di priorità della direttiva corrente: direttive con priorità inferiore non vengono eseguite.</li>
+                        <br />
+                        <br />
+                        <p class="fragment">No Demo this time!</p>
                     </ul>
                 </section>
             </section>
